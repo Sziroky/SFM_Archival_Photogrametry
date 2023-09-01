@@ -27,10 +27,10 @@ def load_images_from_folder(folder):
 baranovski_16_08_82 = load_images_from_folder('D:\Spitsbergen\SFM_Archival_Photogrametry\Images\82_08_16')
 baranovski_17_08_82 = load_images_from_folder('D:\Spitsbergen\SFM_Archival_Photogrametry\Images\82_08_17')
 
-## Checking the shape of images
-# for i in range(6):
-#     print(f"{baranovski_16_08_82[i].shape} --- 16.08.82")
-#     print(f"{baranovski_17_08_82[i].shape} --- 17.08.82")
+# Checking the shape of images
+for i in range(3):
+    print(f"{baranovski_16_08_82[i].shape} --- 16.08.82")
+    print(f"{baranovski_17_08_82[i].shape} --- 17.08.82")
 
 ''' All of the image are 2046 px x 2833 px x 3 chanels '''
 
@@ -38,13 +38,31 @@ baranovski_17_08_82 = load_images_from_folder('D:\Spitsbergen\SFM_Archival_Photo
 # cv2.imshow("Example",baranovski_17_08_82[0])
 # cv2.waitKey(0)
 
-## Image to big for window to display :( -- resizing the window.
-# cv2.namedWindow('image',cv2.WINDOW_NORMAL)
-# cv2.resizeWindow('image',2900,2050)
-#
-# cv2.imshow("image",baranovski_17_08_82[0])
-# cv2.waitKey(0)
+# Image to big for window to display :( -- resizing the window.
+
 
 '''Now, when we can display whole image to find coordinates for ROI(region of interest)'''
+cut = baranovski_16_08_82[1][153:1946, 135:2683]  # Coordinates Manually Set
 
-#todo: 1) Find coordinates for cropping. 2) Crop images 3) Apply some filters to normalize images --- According to Ms.Geyman's work.
+'''Iterate over every Image'''
+cut_images_16_08 = []
+for i in baranovski_16_08_82:
+    cut = i[162:1926, 135:2683]# changing height -- not every image is correctly cropped, greater value should not
+    # impact reconstruction which mainly focused on ground forms.
+    cut_images_16_08.append(cut)
+
+cut_images_17_08 = []
+for i in baranovski_17_08_82:
+    cut = i[179:1926, 135:2683]# changing height -- not every image is correctly cropped, greater value should not
+    # impact reconstruction which mainly focused on ground forms.
+    cut_images_17_08.append(cut)
+
+'''We cropped the images, now its time to think about filters that should be applied to get rid of noise and artefacts '''
+
+cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+cv2.resizeWindow('image', 2900, 2050)
+for i in range(6):
+    cv2.imshow("image", cut_images_17_08[i])
+    cv2.waitKey(0)
+
+# todo:Apply some filters to normalize images --- According to Ms.Geyman's work.
