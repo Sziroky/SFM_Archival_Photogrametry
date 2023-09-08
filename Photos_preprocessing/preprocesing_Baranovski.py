@@ -67,23 +67,28 @@ for i in baranovski_17_08_82:
 #     cv2.imshow("image", cut_images_17_08[i])
 #     cv2.waitKey(0)
 
-# todo:Apply some filters to normalize images --- According to Ms.Geyman's work.
+# todo:Apply some filters to normalize images --- According to Ms.Geyman's work. change images to grayscale
+
 
 # Let's generate image histograms to get information about pixel values in every single pic and its name.
 
 n = 23
 for img in cut_images_17_08:
-    histr = cv2.calcHist([img], [0], None, [256], [0, 256])
+    histr = cv2.calcHist(img, [0], None, [256], [0, 256])
     plt.plot(histr)
-    name = f"SV_1982-08-16_{n}"
-    n += 1
+    name = f"SV_1982-08-17_{n}"
     plt.savefig(fr'D:\SFM_Archival_Photogrametry\Images\Histograms\\{name}')
+    plt.show()
+    n += 1
 
-n = 13
-for img in cut_images_16_08:
-    histr = cv2.calcHist([img], [0], None, [256], [0, 256])
+
+e = 13
+for img1 in cut_images_16_08:
+    histr = cv2.calcHist([img1], [0], None, [256], [0, 256])
     plt.plot(histr)
-    name = f"SV_1982-08-16_{n}"
-    n += 1
+    name = f"SV_1982-08-16_{e}"
     plt.savefig(fr'D:\SFM_Archival_Photogrametry\Images\Histograms\\{name}')
-    
+    plt.show()
+    e += 1
+
+
