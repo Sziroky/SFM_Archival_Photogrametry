@@ -61,8 +61,8 @@ for i in baranovski_17_08_82:
 
 '''We cropped the images, now its time to think about filters that should be applied to get rid of noise and artefacts '''
 
-# cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-# cv2.resizeWindow('image', 2900, 2050)
+cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+cv2.resizeWindow('image', 2900, 2050)
 # for i in range(6):
 #     cv2.imshow("image", cut_images_17_08[i])
 #     cv2.waitKey(0)
@@ -78,7 +78,9 @@ for img in cut_images_17_08:
     plt.plot(histr)
     name = f"SV_1982-08-17_{n}"
     plt.savefig(fr'D:\SFM_Archival_Photogrametry\Images\Histograms\\{name}')
+    cv2.imshow("image", img)
     plt.show()
+    cv2.waitKey(0)
     n += 1
 
 
@@ -88,7 +90,9 @@ for img1 in cut_images_16_08:
     plt.plot(histr)
     name = f"SV_1982-08-16_{e}"
     plt.savefig(fr'D:\SFM_Archival_Photogrametry\Images\Histograms\\{name}')
+    cv2.imshow("image", img1)
     plt.show()
+    cv2.waitKey(0)
     e += 1
 
 
